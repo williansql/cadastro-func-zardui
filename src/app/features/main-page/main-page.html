@@ -1,12 +1,17 @@
   <z-layout class="overflow-hidden h-[100vh]">
     <z-header class="h-16 px-12 bg-[white] border-0 justify-between">
         <span class="text-[#F6A728]" > <strong class="text-[#2E5992] font-black text-lg" >CGTI - </strong> Calangos da Tecnolódia! </span>
+        <div class="menus flex gap-5">
+          <span [routerLink]="'home/cadastro'" >cadastro</span>
+          <span [routerLink]="'home'" >lista</span>
+        </div>
 
     </z-header>
 
     <z-content class="min-h-[200px]">
       <z-toast></z-toast>
-      <app-cadastro></app-cadastro>
+      <!-- <app-cadastro></app-cadastro> -->
+       <router-outlet></router-outlet>
     </z-content>
 
     <z-footer class="h-16 px-12 bg-[#4096ff] text-white border-0 justify-center">Footer</z-footer>

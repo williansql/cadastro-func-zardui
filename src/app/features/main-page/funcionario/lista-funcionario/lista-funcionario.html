@@ -1,0 +1,23 @@
+<table z-table>
+  <caption>
+    A list of your recent invoices.
+  </caption>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Sobrenome</th>
+      <th>email</th>
+      <th>Registro</th>
+    </tr>
+  </thead>
+  <tbody>
+    @for (data of listOfData; track data.id) {
+    <tr>
+      <td class="font-medium">{{ data.nome }}</td>
+      <td>{{ data.sobrenome }}</td>
+      <td>{{ data.email }}</td>
+      <td>{{ data.registro }}</td>
+    </tr>
+    }
+  </tbody>
+</table>
