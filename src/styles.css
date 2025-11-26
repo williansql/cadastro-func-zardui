@@ -36,11 +36,16 @@
   --ring: oklch(0.5548 0.1758 262.28);
 
   /* Cores de gráfico (dinâmicas, seguindo seu esquema) */
-  --chart-1: oklch(0.3831 0.177 262.28); /* primary */
-  --chart-2: oklch(0.6602 0.1878 250.18); /* accent */
-  --chart-3: oklch(0.597 0.1485 154.46); /* success */
-  --chart-4: oklch(0.8625 0.1494 84.65); /* yellow */
-  --chart-5: oklch(0.5758 0.2088 29.48); /* danger */
+  --chart-1: oklch(0.3831 0.177 262.28);
+  /* primary */
+  --chart-2: oklch(0.6602 0.1878 250.18);
+  /* accent */
+  --chart-3: oklch(0.597 0.1485 154.46);
+  /* success */
+  --chart-4: oklch(0.8625 0.1494 84.65);
+  /* yellow */
+  --chart-5: oklch(0.5758 0.2088 29.48);
+  /* danger */
 
   --sidebar: oklch(0.9791 0.0069 304.24);
   --sidebar-foreground: oklch(0.2304 0.0209 264.04);
@@ -53,6 +58,51 @@
 
   --sidebar-border: oklch(0.8785 0.0047 258.33);
   --sidebar-ring: oklch(0.5548 0.1758 262.28);
+
+  --toast-success: oklch(0.597 0.1485 154.46);
+  /* verde */
+  --toast-error: var(--destructive);
+  /* já existe */
+  --toast-warning: oklch(0.8625 0.1494 84.65);
+  /* amarelo */
+  --toast-info: oklch(0.5548 0.1758 262.28);
+  /* azul */
+
+  /* ZardUI custom toast variants */
+  .toaster .success {
+    @apply bg-green-600 text-white border-green-700;
+  }
+
+  .toaster .error {
+    @apply bg-[#d32f2f] text-white border-[#b21d1d];
+  }
+
+  .toaster .warning {
+    @apply bg-[#ffa100] text-[#313131] border-yellow-600;
+  }
+
+  .toaster .info {
+    @apply bg-[#2f5991] text-[white] border-[#193253];
+  }
+
+  .toaster [data-sonner-toast] [data-sonner-progress-bar] {
+    display: none !important;
+  }
+
+  .toaster [data-sonner-toast]:focus {
+    outline: none !important;
+    box-shadow: none !important;
+  }
+
+  .toaster [data-sonner-toast] {
+    outline: none !important;
+    box-shadow: none !important;
+  }
+
+  .toaster [data-sonner-toast] {
+  border-top-color: transparent !important;
+}
+
 }
 
 .dark {
@@ -87,6 +137,44 @@
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.556 0 0);
+  --toast-success: var(--chart-3);
+  --toast-error: var(--destructive);
+  --toast-warning: var(--chart-4);
+  --toast-info: var(--chart-1);
+
+  .toaster .success {
+    @apply bg-green-600 text-white border-green-700;
+  }
+
+  .toaster .error {
+    @apply bg-red-300 text-white border-red-700;
+  }
+
+  .toaster .warning {
+    @apply bg-yellow-500 text-black border-yellow-600;
+  }
+
+  .toaster .info {
+    @apply bg-blue-600 text-white border-blue-700;
+  }
+
+  .toaster [data-sonner-toast] [data-sonner-progress-bar] {
+    display: none !important;
+  }
+
+  .toaster [data-sonner-toast]:focus {
+    outline: none !important;
+    box-shadow: none !important;
+  }
+
+  .toaster [data-sonner-toast] {
+    outline: none !important;
+    box-shadow: none !important;
+  }
+
+  .toaster [data-sonner-toast] {
+  border-top-color: transparent !important;
+}
 }
 
 
@@ -135,6 +223,7 @@
   * {
     @apply border-border outline-ring/50;
   }
+
   body {
     @apply bg-background text-foreground;
   }
