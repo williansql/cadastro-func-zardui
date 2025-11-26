@@ -5,6 +5,7 @@ import { HeaderComponent } from '@shared/components/layout/header.component';
 import { LayoutComponent } from "@shared/components/layout/layout.component";
 import { SidebarComponent } from '@shared/components/layout/sidebar.component';
 import { Cadastro } from "./funcionario/cadastro/cadastro";
+import { ZardToastComponent } from "@shared/components/toast/toast.component";
 
 
 @Component({
@@ -15,7 +16,8 @@ import { Cadastro } from "./funcionario/cadastro/cadastro";
     HeaderComponent,
     ContentComponent,
     FooterComponent,
-    Cadastro
+    Cadastro,
+    ZardToastComponent
 ],
   templateUrl: './main-page.html',
   styleUrl: './main-page.css',

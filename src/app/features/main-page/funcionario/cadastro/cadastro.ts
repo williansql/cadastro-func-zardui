@@ -4,6 +4,8 @@ import { ZardButtonComponent } from '@shared/components/button/button.component'
 import { ZardIconComponent } from '@shared/components/icon/icon.component';
 import { ZardInputGroupComponent } from "@shared/components/input-group/input-group.component";
 import { ZardInputDirective } from '@shared/components/input/input.directive';
+import { toast } from 'ngx-sonner';
+
 @Component({
   selector: 'app-cadastro',
   imports: [
@@ -32,13 +34,38 @@ export class Cadastro {
   })
 
   onSubmit(){
-    if (this.cadastroFuncForm.invalid)
+    if (this.cadastroFuncForm.invalid){
       this.cadastroFuncForm.markAllAsTouched();
-    console.log(this.cadastroFuncForm.value);
+      this.erroCadastro();
+    } else {
+      console.log(this.cadastroFuncForm.value);
+      this.clearForm()
+      this.showToast()
+    }
   }
 
   clearForm(){
     this.cadastroFuncForm.reset();
+  }
+
+  showToast() {
+    toast('Cadastro', {
+      description: 'Cadastro realizado com sucesso',
+      action: {
+        label: 'Fechar',
+        onClick: () => console.log('fechar'),
+      },
+    });
+  }
+
+  erroCadastro(){
+    toast('Erro', {
+      description: 'Verifique todos os campos e tente novamente',
+      action: {
+        label: 'Fechar',
+        onClick: () => console.log('fechar'),
+      }
+    })
   }
 
 }
