@@ -11,7 +11,7 @@
     </tr>
   </thead>
   <tbody>
-    @for (data of listOfData; track data.id) {
+    @for (data of listOfData; track $index) {
     <tr>
       <td class="font-medium">{{ data.nome }}</td>
       <td>{{ data.sobrenome }}</td>
@@ -22,13 +22,34 @@
   </tbody>
 </table> -->
 
+<div class="title mb-[2rem] flex flex-col" >
+  <span class="text-4xl" >Lista de Funcionários</span>
+  <span class="text-sm text-[#2E5992]" >Verifique as informações dos funcionarios abaixo</span>
+</div>
+
 @for (card of listOfData; track $index) {
-  <div class="card">
-    <z-avatar zSrc="error-image.png" zFallback="ZA" zSize="lg" class="w-f" />
-    <div class="card-content">
-      <span class="nome"> {{ card.nome }} </span>
-      <span class="sobrenome"> {{ card.sobrenome }} </span>
-      <span class="registro"> {{ card.registro }} </span>
+
+  <div class="card" (click)="this.openInfo($index)" >
+    <span class="bg-gray-500 rounded-full p-[1rem]" > {{ this.getInitials(card) }} </span>
+
+    <div class="content">
+      <div class="card-content">
+        <span class="text-sm "><strong>Nome:</strong> <strong class="text-[#2E5992]" > {{ card.nome }} {{ card.sobrenome }}</strong></span>
+        <span class="text-sm"><strong>Email:</strong> {{ card.email }} </span>
+      </div>
+
+      @if (this.hideInfo === $index) {
+        <div class="card-content hide-info">
+          <span class="text-sm"><strong>Registro:</strong> {{ card.registro }} </span>
+          <span class="text-sm"><strong>Setor:</strong> {{ card.setor }} </span>
+          <span class="endereco text-sm"><strong>Endereço:</strong> {{ card.endereco }} </span>
+          <div class="icons flex justify-start mt-2 gap-2">
+            <span class="material-symbols-outlined icon-circle edit text-[#47b14c]" (click)="openDialog($index); $event.stopPropagation()" >edit</span>
+            <span class="material-symbols-outlined icon-circle remove text-[#e85f5f]" (click)="openDeleteDialog($index); $event.stopPropagation()">delete</span>
+          </div>
+        </div>
+      }
     </div>
   </div>
+
 }

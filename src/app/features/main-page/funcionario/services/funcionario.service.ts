@@ -1,5 +1,5 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 import { Iuser } from '../interfaces/iuser.interface';
 import { catchError, Observable, throwError } from 'rxjs';
 
@@ -14,6 +14,8 @@ export class FuncionarioService {
     })
   };
 
+  funcionarioEvent: EventEmitter<boolean> = new EventEmitter<boolean>();
+
 
   readonly API = 'http://localhost:3000/api/users'
 
@@ -26,13 +28,27 @@ export class FuncionarioService {
   }
 
   getUser() {
-  return this.httpClient.get('http://localhost:3000/api/users', {
-    headers: {
-      'Cache-Control': 'no-cache'
-    }
-  });
-}
+    return this.httpClient.get('http://localhost:3000/api/users', {
+      headers: {
+        'Cache-Control': 'no-cache'
+      }
+    });
+  }
 
+  putUser(user: Iuser): Observable<Iuser> {
+    if (!user.id) {
+      return throwError(() => new Error('ID do usuário é obrigatório para atualização'));
+    }
+    return this.httpClient.put<Iuser>(`${this.API}/${user.id}`, user, this.httpOptions).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  deleteUser(id: string | number): Observable<void> {
+    return this.httpClient.delete<void>(`${this.API}/${id}`, this.httpOptions).pipe(
+      catchError(this.handleError)
+    );
+  }
 
   private handleError(error: any) {
     console.error('Erro na requisição:', error);

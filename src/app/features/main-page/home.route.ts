@@ -1,9 +1,10 @@
 import { Route, Routes } from "@angular/router";
 import { Cadastro } from "./funcionario/cadastro/cadastro";
 import { ListaFuncionario } from "./funcionario/lista-funcionario/lista-funcionario";
+import { CalendarClock } from "lucide-angular";
 
 export const mainRoute: Routes = [
-  { path: 'home', pathMatch: 'full', redirectTo: 'home/lista' },
-  { path: 'home/lista', component: ListaFuncionario },
-  { path: 'home/cadastro', component: Cadastro }
+  { path: '', pathMatch: 'full', redirectTo: 'lista' },
+  { path: 'lista', component: ListaFuncionario },
+  { path: 'cadastro', component: Cadastro }
 ];

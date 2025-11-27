@@ -1,20 +1,35 @@
   <z-layout class="overflow-hidden h-[100vh]">
-    <z-header class="h-16 px-12 bg-[white] border-0 justify-between">
-        <span class="text-[#F6A728]" > <strong class="text-[#2E5992] font-black text-lg" >CGTI - </strong> Calangos da Tecnolódia! </span>
-        <div class="menus flex gap-5">
-          <span [routerLink]="'home/cadastro'" >cadastro</span>
-          <span [routerLink]="'home/lista'" >lista</span>
-        </div>
+    <z-header class="h-16 px-4 md:px-12 bg-[white] border-0 justify-between">
+      <span class="text-[#F6A728]"> <strong class="text-[#2E5992] font-black text-lg">CGTI - </strong> Calangos da
+        Tecnolódia! </span>
 
+      <!-- Menu hambúrguer para telas menores que 578px -->
+      <button z-button zType="ghost" class="menu-mobile" (click)="openSideMenu()" aria-label="Abrir menu">
+        <i z-icon zType="menu"></i>
+      </button>
+
+      <!-- Menu normal para telas maiores que 578px -->
+      <div class="menus menu-desktop gap-5">
+        <span [routerLink]="['/home', 'cadastro']" class="cursor-pointer hover:opacity-70">cadastro</span>
+        <span [routerLink]="['/home', 'lista']" class="cursor-pointer hover:opacity-70">lista</span>
+      </div>
     </z-header>
 
     <z-content class="min-h-[200px] items-center">
       <z-toast></z-toast>
-      <!-- <app-cadastro></app-cadastro> -->
-       <div class="router max-w-[50%] min-w-[330px]">
-         <router-outlet></router-outlet>
-       </div>
+      <div class="content w-full">
+        <router-outlet></router-outlet>
+      </div>
     </z-content>
 
-    <z-footer class="h-16 px-12 bg-[#4096ff] text-white border-0 justify-center">Footer</z-footer>
+    <z-footer class="h-16 px-4 bg-white text-white border-0 justify-between">
+      <div class="footer-side-a flex gap-3 items-center">
+        <span class="text-sm text-gray-600 menu-desktop">Desenvolvido pelo</span>
+        <img class="w-[40px] h-[40px]" src="/logo/logo-gcti.svg" alt="logo gcti">
+      </div>
+      <div class="side-footer-b flex items-center gap-3">
+        <img class="w-[40px] h-[40px] menu-desktop" src="/logo/prefeitura_parnamirim.svg" alt="logo prefeitura">
+        <span class="text-sm text-gray-600 " >Prefeitura de Parnamirim</span>
+      </div>
+    </z-footer>
   </z-layout>

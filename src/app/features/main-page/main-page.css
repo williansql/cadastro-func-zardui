@@ -1,0 +1,21 @@
+/* Breakpoint customizado para 578px */
+@media (min-width: 578px) {
+  .menu-mobile {
+    display: none;
+  }
+  
+  .menu-desktop {
+    display: flex;
+  }
+}
+
+@media (max-width: 577px) {
+  .menu-mobile {
+    display: block;
+  }
+  
+  .menu-desktop {
+    display: none;
+  }
+}
+

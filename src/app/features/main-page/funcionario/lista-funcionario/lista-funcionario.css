@@ -3,8 +3,8 @@
   border-radius: .5rem;
   padding: 1rem 1.5rem;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  align-items: flex-start;
+  justify-content: flex-start;
   gap: 1rem;
   box-shadow: 2px 2px 8px rgba(0, 0, 0, .1);
   background-color: var(--sidebar-border);
@@ -28,4 +28,17 @@ span.nome{
 
 span.registro{
   font-weight: 300;
+}
+
+.hide-info{
+  transition: .2s;
+}
+
+.endereco{
+  word-wrap: ;
+}
+.icon-circle{
+  padding: .3rem;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 0, 0, .1);
 }

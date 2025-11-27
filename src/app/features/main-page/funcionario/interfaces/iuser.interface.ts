@@ -1,4 +1,5 @@
 export interface Iuser{
+  id?: string | number
   nome: string
   sobrenome: string
   email: string

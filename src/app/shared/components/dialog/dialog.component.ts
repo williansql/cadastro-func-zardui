@@ -2,6 +2,7 @@ import { OverlayModule } from '@angular/cdk/overlay';
 import { BasePortalOutlet, CdkPortalOutlet, type ComponentPortal, PortalModule, type TemplatePortal } from '@angular/cdk/portal';
 import {
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   type ComponentRef,
   computed,
@@ -113,6 +114,13 @@ export class ZardDialogOptions<T, U> {
   styles: [
     `
       :host {
+        inset: 0;
+        margin: auto;
+        width: fit-content;
+        height: fit-content;
+        max-width: calc(100% - 2rem);
+        max-height: calc(100% - 2rem);
+        transform-origin: center center;
         opacity: 1;
         transform: scale(1);
         transition:
@@ -139,6 +147,7 @@ export class ZardDialogOptions<T, U> {
 })
 export class ZardDialogComponent<T, U> extends BasePortalOutlet {
   private readonly host = inject(ElementRef<HTMLElement>);
+  private readonly cdr = inject(ChangeDetectorRef);
   protected readonly config = inject(ZardDialogOptions<T, U>);
 
   protected readonly classes = computed(() => mergeClasses(dialogVariants(), this.config.zCustomClasses));
@@ -163,7 +172,10 @@ export class ZardDialogComponent<T, U> extends BasePortalOutlet {
     if (this.portalOutlet()?.hasAttached()) {
       throw new Error('Attempting to attach modal content after content is already attached');
     }
-    return this.portalOutlet()?.attachComponentPortal(portal);
+    const result = this.portalOutlet()?.attachComponentPortal(portal);
+    // Forçar detecção de mudanças após anexar o conteúdo
+    setTimeout(() => this.cdr.markForCheck(), 0);
+    return result;
   }
 
   attachTemplatePortal<C>(portal: TemplatePortal<C>): EmbeddedViewRef<C> {
@@ -171,7 +183,10 @@ export class ZardDialogComponent<T, U> extends BasePortalOutlet {
       throw new Error('Attempting to attach modal content after content is already attached');
     }
 
-    return this.portalOutlet()?.attachTemplatePortal(portal);
+    const result = this.portalOutlet()?.attachTemplatePortal(portal);
+    // Forçar detecção de mudanças após anexar o conteúdo
+    setTimeout(() => this.cdr.markForCheck(), 0);
+    return result;
   }
 
   onOkClick() {
