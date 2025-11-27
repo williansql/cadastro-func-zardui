@@ -3,10 +3,19 @@ import { ZardTableComponent } from '@shared/components/table/table.component';
 import { Iuser } from '../interfaces/iuser.interface';
 import { FuncionarioService } from '../services/funcionario.service';
 import { toast } from 'ngx-sonner';
+import { ZardCardComponent } from '@shared/components/card/card.component';
+import { ZardButtonComponent } from '@shared/components/button/button.component';
+import { ZardAvatarComponent } from '@shared/components/avatar/avatar.component';
 
 @Component({
   selector: 'app-lista-funcionario',
-  imports: [ZardTableComponent],
+  imports: [
+    ZardTableComponent,
+    ZardCardComponent,
+    ZardButtonComponent,
+    ZardAvatarComponent
+
+  ],
   templateUrl: './lista-funcionario.html',
   styleUrl: './lista-funcionario.css',
 })

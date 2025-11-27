@@ -18,9 +18,7 @@ import { RouterLinkWithHref, RouterOutlet } from "@angular/router";
     HeaderComponent,
     ContentComponent,
     FooterComponent,
-    Cadastro,
     ZardToastComponent,
-    ListaFuncionario,
     RouterOutlet,
     RouterLinkWithHref
 ],

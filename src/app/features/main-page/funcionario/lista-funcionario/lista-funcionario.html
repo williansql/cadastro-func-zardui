@@ -1,4 +1,4 @@
-<table z-table>
+<!-- <table z-table>
   <caption>
     A list of your recent invoices.
   </caption>
@@ -20,4 +20,15 @@
     </tr>
     }
   </tbody>
-</table>
+</table> -->
+
+@for (card of listOfData; track $index) {
+  <div class="card">
+    <z-avatar zSrc="error-image.png" zFallback="ZA" zSize="lg" class="w-f" />
+    <div class="card-content">
+      <span class="nome"> {{ card.nome }} </span>
+      <span class="sobrenome"> {{ card.sobrenome }} </span>
+      <span class="registro"> {{ card.registro }} </span>
+    </div>
+  </div>
+}

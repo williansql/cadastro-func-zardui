@@ -25,11 +25,13 @@ export class FuncionarioService {
       );
   }
 
-  getUser(): Observable<Iuser[]>{
-    return this.httpClient.get<Iuser[]>(this.API).pipe(
-      catchError(this.handleError)
-    );
-  }
+  getUser() {
+  return this.httpClient.get('http://localhost:3000/api/users', {
+    headers: {
+      'Cache-Control': 'no-cache'
+    }
+  });
+}
 
 
   private handleError(error: any) {

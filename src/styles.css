@@ -65,7 +65,7 @@
   /* já existe */
   --toast-warning: oklch(0.8625 0.1494 84.65);
   /* amarelo */
-  --toast-info: oklch(0.5548 0.1758 262.28);
+  --toast-info: oklch(55.48% 0.17592 262.3);
   /* azul */
 
   /* ZardUI custom toast variants */
