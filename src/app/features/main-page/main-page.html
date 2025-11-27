@@ -8,10 +8,12 @@
 
     </z-header>
 
-    <z-content class="min-h-[200px]">
+    <z-content class="min-h-[200px] items-center">
       <z-toast></z-toast>
       <!-- <app-cadastro></app-cadastro> -->
-       <router-outlet></router-outlet>
+       <div class="router max-w-[50%] min-w-[330px]">
+         <router-outlet></router-outlet>
+       </div>
     </z-content>
 
     <z-footer class="h-16 px-12 bg-[#4096ff] text-white border-0 justify-center">Footer</z-footer>
