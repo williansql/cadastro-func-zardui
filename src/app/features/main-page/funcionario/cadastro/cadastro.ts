@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
 import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ZardButtonComponent } from '@shared/components/button/button.component';
 import { ZardIconComponent } from '@shared/components/icon/icon.component';
@@ -11,7 +11,10 @@ import { ZardSelectComponent } from '@shared/components/select/select.component'
 import { ZardSelectItemComponent } from '@shared/components/select/select-item.component';
 import { ZardFormModule } from '@shared/components/form/form.module';
 import { ZardTooltipModule } from '@shared/components/tooltip/tooltip';
-
+import {
+  ZardPopoverComponent,
+  ZardPopoverDirective,
+} from '@shared/components/popover/popover.component';
 
 @Component({
   selector: 'app-cadastro',
@@ -25,13 +28,15 @@ import { ZardTooltipModule } from '@shared/components/tooltip/tooltip';
     ZardSelectComponent,
     ZardSelectItemComponent,
     ZardFormModule,
-    ZardTooltipModule
+    ZardTooltipModule,
+    ZardPopoverDirective,
+    ZardPopoverComponent,
   ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './cadastro.html',
   styleUrl: './cadastro.css',
 })
 export class Cadastro implements OnInit {
-
   private readonly fb = inject(FormBuilder);
   private readonly funcionarioService = inject(FuncionarioService);
 
@@ -43,53 +48,52 @@ export class Cadastro implements OnInit {
     endereco: ['', [Validators.required]],
     dataCriacao: [Date.now().toString()],
     criadoPor: ['Fofinho'],
-    setor: ['', [Validators.required]]
+    setor: ['', [Validators.required]],
   });
 
-  ngOnInit(){
-
-  }
+  ngOnInit() {}
 
   onSubmit() {
-    console.log("Formulario de cadastro", this.cadastroFuncForm.value);
-      // this.loading = true;
+    console.log('Formulario de cadastro', this.cadastroFuncForm.value);
+    // this.loading = true;
 
-      if(this.cadastroFuncForm.invalid){
-        this.cadastroFuncForm.markAllAsTouched()
-        this.showToast('error', 'Erro ao salvar o Funcionário', 'Verifique todos os campos e preencha corretamente' )
-      } else {
+    if (this.cadastroFuncForm.invalid) {
+      this.cadastroFuncForm.markAllAsTouched();
+      this.showToast(
+        'error',
+        'Erro ao salvar o Funcionário',
+        'Verifique todos os campos e preencha corretamente'
+      );
+    } else {
+      // Preparar os dados para enviar
+      const funcionarioData: Iuser = {
+        nome: this.cadastroFuncForm.value.nome!,
+        sobrenome: this.cadastroFuncForm.value.sobrenome!,
+        email: this.cadastroFuncForm.value.email!,
+        registro: this.cadastroFuncForm.value.registro || '',
+        endereco: this.cadastroFuncForm.value.endereco!,
+        dataCriacao: this.cadastroFuncForm.value.dataCriacao!,
+        criadoPor: this.cadastroFuncForm.value.criadoPor!,
+        setor: this.cadastroFuncForm.value.setor || '',
+      };
 
-        // Preparar os dados para enviar
-        const funcionarioData: Iuser = {
-          nome: this.cadastroFuncForm.value.nome!,
-          sobrenome: this.cadastroFuncForm.value.sobrenome!,
-          email: this.cadastroFuncForm.value.email!,
-          registro: this.cadastroFuncForm.value.registro || '',
-          endereco: this.cadastroFuncForm.value.endereco!,
-          dataCriacao: this.cadastroFuncForm.value.dataCriacao!,
-          criadoPor: this.cadastroFuncForm.value.criadoPor!,
-          setor: this.cadastroFuncForm.value.setor || ''
-        };
-
-        // Chamar o serviço
-        this.funcionarioService.postUser(funcionarioData).subscribe({
-          next: (response) => {
-            console.log('Funcionário criado com sucesso:', response);
-            // this.loading = false;
-            this.clearForm();
-            this.showToast('success', 'Sucesso', 'Usuario cadastrado com sucesso');
-            this.funcionarioService.funcionarioEvent.emit(true);
-            console.log(response);
-
-          },
-          error: (error) => {
-            console.error('Erro ao criar funcionário:', error);
-            // this.loading = false;
-          }
-        });
-      }
+      // Chamar o serviço
+      this.funcionarioService.postUser(funcionarioData).subscribe({
+        next: (response) => {
+          console.log('Funcionário criado com sucesso:', response);
+          // this.loading = false;
+          this.clearForm();
+          this.showToast('success', 'Sucesso', 'Usuario cadastrado com sucesso');
+          this.funcionarioService.funcionarioEvent.emit(true);
+          console.log(response);
+        },
+        error: (error) => {
+          console.error('Erro ao criar funcionário:', error);
+          // this.loading = false;
+        },
+      });
+    }
   }
-
 
   clearForm() {
     this.cadastroFuncForm.reset();
@@ -102,9 +106,9 @@ export class Cadastro implements OnInit {
       position: 'top-right',
       action: {
         label: 'fechar',
-        onClick: () => console.log('fechado')
-      }
-    })
+        onClick: () => console.log('fechado'),
+      },
+    });
   }
 
   isFieldInvalid(fieldName: keyof Iuser): boolean {

@@ -1,38 +1,93 @@
-<div class="cadastro-container flex flex-col gap-3 min-w-[335px] max-w-[50%]" [formGroup]="cadastroFuncForm" (ngSubmit)="onSubmit()" >
+<div class="cadastro-container flex flex-col gap-3 min-w-[335px] max-w-[50%]" [formGroup]="cadastroFuncForm"
+  (ngSubmit)="onSubmit()">
 
-  <div class="title my-5" >
-    <h1 class="text-4xl" >Cadastro dos dados</h1>
-    <h2 class="text-md text-[#2e5992]" >Cadastro dos dados</h2>
+  <div class="title my-5">
+    <h1 class="text-4xl">Cadastro dos dados</h1>
+    <h2 class="text-md text-[#2e5992]">Cadastro dos dados</h2>
   </div>
 
-  <z-form-control class="form-group flex flex-col" [errorMessage]="isFieldInvalid('nome') ? 'O nome é obrigatório' : ''" >
-    <label z-form-label zRequired class="text-[#2e5992]" zTooltip="é o seu nome, ex: willians" for="nome">Nome</label>
+  <z-form-control class="form-group flex flex-col"
+    [errorMessage]="isFieldInvalid('nome') ? 'O nome é obrigatório' : ''">
+    <div class="labels flex justify-between items-center">
+      <label z-form-label zRequired class="text-[#2e5992]" zTooltip="é o seu nome, ex: willians" for="nome">Nome
+      </label>
+      <label class="popover material-symbols-outlined text-[#F6A728]" zPopover [zContent]="popoverContent">help</label>
+    </div>
     <input id="nome" z-input placeholder="Insira o seu nome" formControlName="nome" />
   </z-form-control>
-  <z-form-control class="form-group flex flex-col" [errorMessage]="isFieldInvalid('sobrenome') ? 'O sobrenome é obrigatório' : ''">
-    <label z-form-label zRequired class="text-[#2e5992]" for="sobrenome" zTooltip="é o seu sobrenome, ex: Queiroz Lisardo">Sobrenome</label>
+  <z-form-control class="form-group flex flex-col"
+    [errorMessage]="isFieldInvalid('sobrenome') ? 'O sobrenome é obrigatório' : ''">
+    <label z-form-label zRequired class="text-[#2e5992]" for="sobrenome"
+      zTooltip="é o seu sobrenome, ex: Queiroz Lisardo">Sobrenome</label>
     <input id="sobrenome" z-input placeholder="Insira o seu sobrenome" formControlName="sobrenome" />
   </z-form-control>
-  <z-form-control class="form-group flex flex-col" [errorMessage]="isFieldInvalid('email') ? 'O email é obrigatório' : ''">
-    <label z-form-label zRequired class="text-[#2e5992]" zTooltip="ex: willians.teste@gmail.com" for="email">Email</label>
+  <z-form-control class="form-group flex flex-col"
+    [errorMessage]="isFieldInvalid('email') ? 'O email é obrigatório' : ''">
+    <div class="labels">
+      <label z-form-label zRequired class="text-[#2e5992]" zTooltip="ex: willians.teste@gmail.com"
+        for="email">Email</label>
+      <label class="popover material-symbols-outlined" zPopover [zContent]="popoverEmail">help</label>
+    </div>
     <input id="email" z-input placeholder="Insira o seu email" formControlName="email" />
   </z-form-control>
-  <z-form-control class="form-group flex flex-col" [errorMessage]="isFieldInvalid('registro') ? 'O registro é obrigatório' : ''">
+  <z-form-control class="form-group flex flex-col"
+    [errorMessage]="isFieldInvalid('registro') ? 'O registro é obrigatório' : ''">
     <label z-form-label zRequired class="text-[#2e5992]" for="registro" zTooltip="ex: 55487">Registro</label>
     <input id="registro" z-input placeholder="Insira o seu Registro" formControlName="registro" />
   </z-form-control>
-  <z-form-control class="form-group flex flex-col" [errorMessage]="isFieldInvalid('endereco') ? 'O endereço é obrigatório' : ''">
-    <label z-form-label zRequired class="text-[#2e5992]" for="endereco" zTooltip="exemplo: Rua do teste, 50, Santa teresa, Parnamirim/RN" >Endereço</label>
+  <z-form-control class="form-group flex flex-col"
+    [errorMessage]="isFieldInvalid('endereco') ? 'O endereço é obrigatório' : ''">
+    <label z-form-label zRequired class="text-[#2e5992]" for="endereco"
+      zTooltip="exemplo: Rua do teste, 50, Santa teresa, Parnamirim/RN">Endereço</label>
     <input id="endereco" z-input placeholder="Insira o seu Endereço" formControlName="endereco" />
   </z-form-control>
-  <z-form-control class="form-group flex flex-col" [errorMessage]="isFieldInvalid('setor') ? 'O setor é obrigatório' : ''" >
-    <label z-form-label zRequired class="text-[#2e5992]" for="setor" zTooltip="secretaria/setor ao qual esta lotado, ex: GACIV-GCTI-Desenvolvimento" >Setor</label>
+  <z-form-control class="form-group flex flex-col"
+    [errorMessage]="isFieldInvalid('setor') ? 'O setor é obrigatório' : ''">
+    <div class="labels">
+      <label z-form-label zRequired class="text-[#2e5992]" for="setor" zTooltip="secretaria/setor ao qual esta lotado, ex: GACIV-GCTI-Desenvolvimento">Setor</label>
+      <label class="popover material-symbols-outlined" zPopover [zContent]="popoverSetor">help</label>
+    </div>
     <input id="setor" z-input placeholder="Insira o nome do setor" formControlName="setor" />
   </z-form-control>
 
   <div class="button flex mt-5 gap-5">
-    <button z-button zType="default" zSize="default" class="grow" (click)="onSubmit()" >Salvar</button>
-    <button z-button zType="outline" zSize="default" class="grow" (click)="clearForm()" >Limpar</button>
+    <button z-button zType="default" zSize="default" class="grow" (click)="onSubmit()">Salvar</button>
+    <button z-button zType="outline" zSize="default" class="grow" (click)="clearForm()">Limpar</button>
   </div>
 
 </div>
+
+
+<ng-template #popoverContent>
+  <z-popover>
+    <div class="space-y-2">
+      <h4 class="font-medium leading-none">Exemplo</h4>
+      <img src="/images/popover-rg.png" alt="RG">
+    </div>
+  </z-popover>
+</ng-template>
+
+<ng-template #popoverEmail>
+  <z-popover>
+    <div class="space-y-2">
+      <h4 class="font-medium leading-none">Exemplo</h4>
+      <img src="/images/popover-email.png" alt="email">
+    </div>
+  </z-popover>
+</ng-template>
+
+<ng-template #popoverSetor>
+  <z-popover>
+    <div class="space-y-2">
+      <h4 class="font-medium leading-none">Exemplo</h4>
+      <iframe class="menu-mobile" width="300" height="170" src="https://www.youtube.com/embed/MtKqlm_EFv8?si=aeruULdvqD9EBh_6&amp;start=86"
+        title="YouTube video player" frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+      <iframe class="menu-desktop"  width="560" height="320" src="https://www.youtube.com/embed/MtKqlm_EFv8?si=aeruULdvqD9EBh_6&amp;start=86"
+        title="YouTube video player" frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    </div>
+  </z-popover>
+</ng-template>

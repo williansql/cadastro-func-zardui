@@ -3,9 +3,17 @@
   .menu-mobile {
     display: none;
   }
-  
+
   .menu-desktop {
     display: flex;
+  }
+
+  .text-mobile{
+    display: none;
+  }
+
+  .text-desktop{
+
   }
 }
 
@@ -13,7 +21,15 @@
   .menu-mobile {
     display: block;
   }
-  
+
+  .text-mobile{
+
+  }
+
+  .text-desktop{
+    display: none;
+  }
+
   .menu-desktop {
     display: none;
   }

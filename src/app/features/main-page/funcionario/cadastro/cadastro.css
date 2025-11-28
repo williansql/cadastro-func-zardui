@@ -1,0 +1,47 @@
+.popover{
+  cursor: pointer;
+  color: #F6A728;
+}
+
+.labels{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+@media (min-width: 578px) {
+  .menu-mobile {
+    display: none;
+  }
+
+  .menu-desktop {
+    display: flex;
+  }
+
+  .text-mobile{
+    display: none;
+  }
+
+  .text-desktop{
+
+  }
+}
+
+@media (max-width: 577px) {
+  .menu-mobile {
+    display: block;
+  }
+
+  .text-mobile{
+
+  }
+
+  .text-desktop{
+    display: none;
+  }
+
+  .menu-desktop {
+    display: none;
+  }
+}
+
